@@ -36,4 +36,29 @@ def hangman(word):
             board[letter_index] = letter
             # Replace the guessed letter with a different symbol so that it is not pisked up again. 
             rletters[letter_index] = '*'
-hangman('wait')
+        else:
+            # Increment wrong score.
+            wrong += 1
+        # Print the full board for reference.
+        print((' '.join(board)))
+        
+        e = wrong + 1
+        # Print the relative number of hangman stages based on number of wrong inputs.
+        print('\n'.join(stages[0:e]))
+
+        # Check for win condition.
+        if '__' not in board:
+            print('\nYou win! \nCaribbean man is free.')
+            print(''.join(board))
+            win = True
+            break
+
+    # Print losing statements and let user know what the correct answer was.
+    if not win:
+        print('\n'.join(stages[0:wrong]))
+        print('\nRIP Caribbean man! \nBetter luck next time.')
+        print(f'The answer was "{word}".')
+
+def main():
+    pass
+main()

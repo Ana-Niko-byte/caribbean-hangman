@@ -11,8 +11,8 @@ def category_selection():
     """
     This function handles category selection and uses words from the relative list.
     """
+    # The value the user chose for the game category.
     category = opening()
-    
     if category == 'e':
         print('\nYou have chosen Easy! Have fun!')
         easy_category = [
@@ -20,6 +20,7 @@ def category_selection():
             "kite", "lion", "mouse", "nest", "orange", "pig", "queen", "rat", "snake", 
             "tree", "umbrella", "van", "wolf", "xray", "yarn", "zebra"
         ]
+        # Randomly selects a word from the list.
         chosen_word = random.choice(easy_category)
         return chosen_word
     elif category == 'm':
@@ -47,10 +48,10 @@ def category_selection():
         print(f'Invalid entry for category selection.\nYou typed {category}.')
         raise f'Invalid entry for category selection.\nYou typed "{category}".'
     
-
-def hangman(word):
-    # Initialise count for wrong count of user.
-    wrong = 0
+def stages():
+    """
+    This function stores the 'stages' of the hangman game.
+    """
     # Caribbean hangman shape.
     # Note: the '\\\\' part of the hat is '\\' being escaped by '\\' due to the way python deals with strings.
     stages = [
@@ -70,6 +71,16 @@ def hangman(word):
         '|                ',
         '|_____________   ',
     ]
+    return stages
+
+def hangman(word):
+    """
+    This is the main function for the hangman game. 
+    It handles conditions for user input,
+    """
+    # Initialise count for wrong count of user.
+    wrong = 0
+    hangman_stages = stages()
     # Create a list of the called on word for hangman game.
     rletters = list(word)
     # Underside of the letter, multiplied by the amount of letters in the chosen word.
@@ -78,7 +89,7 @@ def hangman(word):
     win = False
     print('Welcome to Caribbean Hangman!')
 
-    while wrong < len(stages):
+    while wrong < len(hangman_stages):
         # On new line, ask for letter input.
         print('\n')
         message = 'Guess a letter:'
@@ -95,12 +106,12 @@ def hangman(word):
         else:
             # Increment wrong score.
             wrong += 1
-        # Print the full board for reference.
-        print((' '.join(board)))
-        
+
         e = wrong + 1
         # Print the relative number of hangman stages based on number of wrong inputs.
-        print('\n'.join(stages[0:e]))
+        print('\n'.join(hangman_stages[0:e]))
+        # Print the full board for reference.
+        print((' '.join(board)))
 
         # Check for win condition.
         if '__' not in board:
@@ -111,11 +122,14 @@ def hangman(word):
 
     # Print losing statements and let user know what the correct answer was.
     if not win:
-        print('\n'.join(stages[0:wrong]))
+        print('\n'.join(hangman_stages[0:wrong]))
         print('\nRIP Caribbean man! \nBetter luck next time.')
         print(f'The answer was "{word}".')
 
 def main():
+    """
+    This function calls all functions for the game to work.
+    """
     category_word = category_selection()
     hangman(category_word)
 main()

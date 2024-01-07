@@ -12,55 +12,63 @@ def category_selection():
     This function handles category selection and uses words from the relative list.
     """
     category = opening()
-    try:
-        if category == 'e':
-            print('\nYou have chosen Easy!')
-            easy_category = [
-                "apple", "ball", "cat", "dog", "egg", "fish", "goat", "hat", "ice", "jar",
-                "kite", "lion", "mouse", "nest", "orange", "pig", "queen", "rat", "snake", 
-                "tree", "umbrella", "van", "wolf", "xray", "yarn", "zebra"
-            ]
-            chosen_word = random.choice(easy_category)
-            return chosen_word
-        elif category == 'm':
-            print('\nYou have chosen Medium!')
-            medium_category = [
-                "banana", "cactus", "dragon", "elephant", "flamingo", "giraffe", "hamburger",
-                "internet", "jungle", "kangaroo", "library", "mountain", "notebook", 
-                "octopus", "penguin", "quartz", "rainbow", "squirrel", "triangle", 
-                "umbrella", "volcano", "waffle", "xylophone", "yogurt", "zeppelin"
-            ]
-            chosen_word = random.choice(medium_category)
-            return chosen_word
-        elif category == 'h':
-            print('\nYou have chosen Hard! Good luck!')
-            hard_category = [
-                "abstract", "buzzard", "cryptic", "dwarves", "espionage", "fjord", 
-                "gazebo", "hyphen", "ivory", "jigsaw", "kayak", "labyrinth", 
-                "mystique", "numbskull", "oxygen", "pixel", "quarantine", "rhythm", 
-                "sphinx", "tundra", "unzip", "vortex", "waltz", "xylophone", 
-                "yacht", "zodiac"
-            ]
-            chosen_word = random.choice(hard_category)
-            return chosen_word
-    except ValueError as e:
-        raise f'Invalid entry for category selection.\nYou typed {e}'
+    
+    if category == 'e':
+        print('\nYou have chosen Easy! Have fun!')
+        easy_category = [
+            "apple", "ball", "cat", "dog", "egg", "fish", "goat", "hat", "ice", "jar",
+            "kite", "lion", "mouse", "nest", "orange", "pig", "queen", "rat", "snake", 
+            "tree", "umbrella", "van", "wolf", "xray", "yarn", "zebra"
+        ]
+        chosen_word = random.choice(easy_category)
+        return chosen_word
+    elif category == 'm':
+        print('\nYou have chosen Medium! Enjoy!')
+        medium_category = [
+            "banana", "cactus", "dragon", "elephant", "flamingo", "giraffe", "hamburger",
+            "internet", "jungle", "kangaroo", "library", "mountain", "notebook", 
+            "octopus", "penguin", "quartz", "rainbow", "squirrel", "triangle", 
+            "umbrella", "volcano", "waffle", "xylophone", "yogurt", "zeppelin"
+        ]
+        chosen_word = random.choice(medium_category)
+        return chosen_word
+    elif category == 'h':
+        print('\nYou have chosen Hard! Good luck!')
+        hard_category = [
+            "abstract", "buzzard", "cryptic", "dwarves", "espionage", "fjord", 
+            "gazebo", "hyphen", "ivory", "jigsaw", "kayak", "labyrinth", 
+            "mystique", "numbskull", "oxygen", "pixel", "quarantine", "rhythm", 
+            "sphinx", "tundra", "unzip", "vortex", "waltz", "xylophone", 
+            "yacht", "zodiac"
+        ]
+        chosen_word = random.choice(hard_category)
+        return chosen_word
+    else:
+        print(f'Invalid entry for category selection.\nYou typed {category}.')
+        raise f'Invalid entry for category selection.\nYou typed "{category}".'
+    
 
 def hangman(word):
     # Initialise count for wrong count of user.
     wrong = 0
     # Caribbean hangman shape.
+    # Note: the '\\\\' part of the hat is '\\' being escaped by '\\' due to the way python deals with strings.
     stages = [
-        '_____________', 
-        '|            ',
-        '|     ___    ',
-        '|    //|\\   ',
-        '|  --------- ',
-        '|   ( ._. )  ',
-        '|      |     ',
-        '|   __| |__  ',
-        '|     | |    ', 
-        '|    _| |_    '
+        '_____________    ', 
+        '|          |     ',
+        '|          |     ',
+        '|         ___    ',
+        '|        //|\\\\ ',
+        '|      --------- ',
+        '|       ( ._. )  ',
+        '|          |     ',
+        '|       __| |__  ',
+        '|         |_|    ',
+        '|         | |    ', 
+        '|        _| |_   ',
+        '|                ',
+        '|                ',
+        '|_____________   ',
     ]
     # Create a list of the called on word for hangman game.
     rletters = list(word)
@@ -108,5 +116,6 @@ def hangman(word):
         print(f'The answer was "{word}".')
 
 def main():
-    pass
+    category_word = category_selection()
+    hangman(category_word)
 main()

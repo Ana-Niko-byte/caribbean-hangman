@@ -1,3 +1,12 @@
+import random
+def opening():
+    category_message = 'Please choose a category to begin the game:'
+    print('\nFor "Easy", press "e"')
+    print('\nFor "Medium", press "m"')
+    print('\nFor "Hard", press "h"')
+    chosen = input(category_message)
+    return chosen
+
 def hangman(word):
     # Initialise count for wrong count of user.
     wrong = 0

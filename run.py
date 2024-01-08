@@ -1,6 +1,11 @@
 import random
+import pyfiglet 
 def opening():
-    category_message = 'Please choose a category to begin the game:'
+    # Convert text to ASCII art
+    ascii_art = pyfiglet.figlet_format("Caribbean Hangman")
+    # Print the ASCII art
+    print(ascii_art + '\n')
+    category_message = 'Please choose a category to begin the game: '
     print('\nFor "Easy", press "e"')
     print('\nFor "Medium", press "m"')
     print('\nFor "Hard", press "h"')

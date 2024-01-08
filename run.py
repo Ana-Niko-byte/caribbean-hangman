@@ -12,7 +12,7 @@ def category_selection():
     This function handles category selection and uses words from the relative list.
     """
     # The value the user chose for the game category.
-    category = opening()
+    category = opening().lower()
     if category == 'e':
         print('\nYou have chosen Easy! Have fun!')
         easy_category = [
